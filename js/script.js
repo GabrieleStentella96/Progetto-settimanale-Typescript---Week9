@@ -48,6 +48,11 @@ class User extends Smartphone {
         this.numCalls = this.numCalls * 0;
         console.log(this.numCalls);
     }
+    stopCall() {
+        this.seconds = 0;
+        this.minutes = 0;
+        this.hours = 0;
+    }
 }
 let arrUser = [];
 let User1 = new User(0.2, 0, 0, 0, 0, 0);
@@ -67,7 +72,9 @@ let chargeUser3 = document.getElementById('charge3');
 chargeUser3.addEventListener('click', function () {
     User3.chargeCredit();
 });
-const CRONOS = document.querySelector('.call');
+const CRONOS1 = document.getElementById('call1');
+const CRONOS2 = document.getElementById('call2');
+const CRONOS3 = document.getElementById('call3');
 let timerUser1;
 let timerUser2;
 let timerUser3;
@@ -79,20 +86,72 @@ let creditUser2 = document.querySelector('.credit');
 let creditUser3 = document.querySelector('.credit');
 let cancel = document.querySelector('.erase');
 let seeCredit = document.querySelector('#credit');
-CRONOS.addEventListener('click', function () {
+CRONOS1.addEventListener('click', function () {
     if (User1.charge < COSTO) {
         alert('Siamo spiacenti, ma il tuo credito è insufficiente. Effettua una ricarica');
     }
     else {
         timerUser1 = setInterval(function () { User1.smartphoneCall(); }, 1000);
-        intervalUser1 = setInterval(Timer, 1000);
+        intervalUser1 = setInterval(showTimer, 1000);
     }
 });
-function Timer() {
+function showTimer() {
     let tikTok1 = document.getElementById('timer1');
     tikTok1.innerHTML = +(User1.minutes > 9 ? User1.minutes : '0' + User1.minutes) + ':'
         + (User1.seconds > 9 ? User1.seconds : '0' + User1.seconds);
 }
 cancel.addEventListener('click', function () {
     User1.eraseCalls();
+});
+let stopCall1 = document.getElementById('stop1');
+stopCall1.addEventListener('click', function () {
+    clearInterval(timerUser1);
+    clearInterval(intervalUser1);
+    User1.stopCall();
+});
+function showTimer2() {
+    let tikTok2 = document.getElementById('timer2');
+    tikTok2.innerHTML = +(User2.minutes > 9 ? User2.minutes : '0' + User2.minutes) + ':'
+        + (User2.seconds > 9 ? User2.seconds : '0' + User2.seconds);
+}
+cancel.addEventListener('click', function () {
+    User2.eraseCalls();
+});
+let stopCall2 = document.getElementById('stop2');
+stopCall2.addEventListener('click', function () {
+    clearInterval(timerUser2);
+    clearInterval(intervalUser2);
+    User2.stopCall();
+});
+CRONOS2.addEventListener('click', function () {
+    if (User2.charge < COSTO) {
+        alert('Siamo spiacenti, ma il tuo credito è insufficiente. Effettua una ricarica');
+    }
+    else {
+        timerUser2 = setInterval(function () { User2.smartphoneCall(); }, 1000);
+        intervalUser2 = setInterval(showTimer, 1000);
+    }
+});
+function showTimer3() {
+    let tikTok3 = document.getElementById('timer3');
+    tikTok3.innerHTML = +(User3.minutes > 9 ? User3.minutes : '0' + User3.minutes) + ':'
+        + (User3.seconds > 9 ? User3.seconds : '0' + User3.seconds);
+}
+cancel.addEventListener('click', function () {
+    User3.eraseCalls();
+});
+let stopCall3 = document.getElementById('stop3');
+stopCall3.addEventListener('click', function () {
+    clearInterval(timerUser3);
+    clearInterval(intervalUser3);
+    User3.stopCall();
+});
+CRONOS3.addEventListener('click', function () {
+    if (User3.charge < COSTO) {
+        alert('Siamo spiacenti, ma il tuo credito è insufficiente. Effettua una ricarica');
+    }
+    else {
+        timerUser3 = setInterval(function () { User3.smartphoneCall(); }, 1000);
+        intervalUser3 = setInterval(showTimer, 1000);
+    }
 });
