@@ -194,6 +194,3 @@ CRONOS3!.addEventListener('click',function(){
 })
 
 
-
-
-
